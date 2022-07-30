@@ -1,8 +1,8 @@
 <div class="landing-block">
 
-  <form (ngSubmit)="onSubmitForm()">
+  <form    #monFormulaire = "ngForm"    (ngSubmit)="onSubmitForm(monFormulaire)" >
     <label for="emailInput">Inscrivez-vous pour recevoir notre newsletter !</label>
-    <input id="emailInput" name="userEmail" type="email" [(ngModel)]="userEmail">
+    <input id="emailInput" name="userEmail" type="email" ngModel >
     <button type="submit">OK!</button>
 </form>
   
