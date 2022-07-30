@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FaceSnap } from '../models/face-snap.model';
@@ -15,6 +15,9 @@ export class NewFaceSnapComponent implements OnInit {
   facesnapAttend$!:  Observable<FaceSnap> ; 
 
 
+  urlRegex!: RegExp;
+
+
   constructor( private formbuilder: FormBuilder) { }
 
 
@@ -22,11 +25,11 @@ export class NewFaceSnapComponent implements OnInit {
   ngOnInit(): void {
 
 
-
+    this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
     this.monFormulaire = this.formbuilder.group({
-      title: [null],
-      description: [null],
-      imageUrl: [null],
+      title: [null , [Validators.required] ],
+      description: [null , [Validators.required]],
+      imageUrl: [null , [Validators.required ,  Validators.pattern(this.urlRegex)]],
       location: [null]
      }) ;
   
