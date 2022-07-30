@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
+  userEmail!: string;
+
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -17,4 +20,7 @@ export class LandingPageComponent implements OnInit {
     this.router.navigateByUrl('facesnaps');
   }
 
+  onSubmitForm() {
+    console.log(this.userEmail);
+  }
 }
