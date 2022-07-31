@@ -44,17 +44,22 @@ export class FaceSnapsService {
 }
 
 
-  AjoueFacesnap(formValue: { title: string, description: string, imageUrl: string, location?: string }): void {
-    const facesnapAjouter = {
-      ...formValue,
-      snaps: 0,
-      createdDate: new Date(),
-      id: this.faceSnaps[this.faceSnaps.length - 1].id + 1
-    };
-    this.faceSnaps.push(facesnapAjouter);
+  AjoueFacesnap(formValue: { title: string, description: string, imageUrl: string, location?: string }): Observable<FaceSnap> {
+    return this.getAllFaceSnaps().pipe(
+         map(facesnaps => [...facesnaps].sort((a,b) => a.id - b.id)),
+         map(sortedFacesnaps => sortedFacesnaps[sortedFacesnaps.length - 1]),
+         map(previousFacesnap => ({
+            ...formValue,
+            snaps: 0,
+            createdDate: new Date(),
+            id: previousFacesnap.id + 1
+        })),
+        switchMap(newFacesnap => this.http.post<FaceSnap>(
+            'http://localhost:3000/facesnaps',
+            newFacesnap)
+        )
+    );
   }
-
-
 
   
 
