@@ -3,15 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http' ;
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { FaceSnapsModule } from './face-snaps/face-snaps.module';
+import { LandingPageModule } from './landing-page/landing-page.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,7 +19,7 @@ import { FaceSnapsModule } from './face-snaps/face-snaps.module';
     ReactiveFormsModule ,
     HttpClientModule ,
     CoreModule ,
-    FaceSnapsModule
+    LandingPageModule
 
   ],
   providers: [
